@@ -211,7 +211,7 @@ Use always method `POST` for the proxy call. The upstream HTTP method is include
 Check the [examples page](/examples.md).
 
 
-# AppGate connection specifics
+# Conkolla Reference 
 ## Login options and controls
 Either you browse the login form from the UI or get the possible options/fields from a rest call. Note there might be more options from the rest call than on the web login form:
 ```shell
@@ -270,6 +270,37 @@ Note that the form data and the JSON data render to the same attributes and some
 |promCollector|String:`"true"` or `""`| Setting this flag allows you enable prometheus exporter for the connected collective. It acts like a pull gateway exported, reflecting all metrics of the AppGate collective|
 
 
+
+## Command line flags
+
+```shell
+ --address string
+    	The IP of the proxy. Use 0.0.0.0 to share on network. Use localhost not to share. (default "localhost")
+ --apiversion string
+    	Default API version for new connections. (default "11")
+ --authName string
+    	Username for Basic Authentication.
+ --authPassword string
+    	Password for Basic Authentication.
+ --certHosts string
+    	Comma-separated hostnames and IPs to generate a certificate for. Generates new certs every time, ignoring the on-board cert.
+ --conkollaID string
+    	An arbitrary string to identify this running instance.
+ --getOnly
+    	Allow only http method GET for all upstream call.
+ --help
+    	Display usage
+ --http
+    	Use http instead of https.
+ --noAuth
+    	Turn basic authentication off. If http is used instad of https, basic auth is turned off.
+ --port string
+    	The port of the proxy. (default "4433")
+ --version
+    	6.4.0 (ha:15c1)
+ --whiteListMonitoring
+    	White list upstream calls required for monitoring. All Others are forbidden.
+```
 
 
 # Conkolla internals

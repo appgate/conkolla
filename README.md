@@ -44,8 +44,8 @@ Conkolla (64bit) runs on macOS, Windows and linux. Download the binaries:
 
 ### Docker
 ```shell
-docker pull mar8x/conkolla-prometheus-ha:latest
-docker run -p 4433:4433 mar8x/conkolla-prometheus-ha:latest --authName maraboux --authPassword maraboux
+docker pull mar8x/conkolla:latest
+docker run -p 4433:4433 mar8x/conkolla:latest --authName maraboux --authPassword maraboux
 ```
 
 ### k8s
@@ -70,7 +70,7 @@ Open a cmd line or powershell, then type `Conkolla.exe --authName maraboux --aut
 
 ### Linux & macOS
 ```shell
-chmod +x Conkolla
+chmod +x conkolla
 ./Conkolla --authName maraboux --authPassword maraboux
 ```
 *you will see a start message, something like this:*

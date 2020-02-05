@@ -274,32 +274,34 @@ Note that the form data and the JSON data render to the same attributes and some
 ## Command line flags
 
 ```shell
- --address string
-    	The IP of the proxy. Use 0.0.0.0 to share on network. Use localhost not to share. (default "localhost")
- --apiversion string
-    	Default API version for new connections. (default "11")
- --authName string
-    	Username for Basic Authentication.
- --authPassword string
-    	Password for Basic Authentication.
- --certHosts string
-    	Comma-separated hostnames and IPs to generate a certificate for. Generates new certs every time, ignoring the on-board cert.
- --conkollaID string
-    	An arbitrary string to identify this running instance.
- --getOnly
-    	Allow only http method GET for all upstream call.
- --help
-    	Display usage
- --http
-    	Use http instead of https.
- --noAuth
-    	Turn basic authentication off. If http is used instad of https, basic auth is turned off.
- --port string
-    	The port of the proxy. (default "4433")
- --version
-    	6.4.0 (ha:15c1)
- --whiteListMonitoring
-    	White list upstream calls required for monitoring. All Others are forbidden.
+-address string
+        The IP of the proxy. Use 0.0.0.0 to share on network. Use localhost not to share. (default "localhost")
+  -apiversion string
+        Default API version for new connections. (default "11")
+  -authName string
+        Username for Basic Authentication.
+  -authPassword string
+        Password for Basic Authentication.
+  -certHosts string
+        Comma-separated hostnames and IPs to generate a certificate for. Generates new certs every time, ignoring the on-board cert.
+  -combineLogs
+        Write connection logs to stdout instead of individual files.
+  -conkollaID string
+        An arbitrary string to identify this running instance.
+  -getOnly
+        Allow only http method GET for all upstream call.
+  -help
+        Display usage
+  -http
+        Use http instead of https.
+  -noAuth
+        Turn basic authentication off. If http is used instad of https, basic auth is turned off.
+  -port string
+        The port of the proxy. (default "4433")
+  -version
+        6.4.1 (release-6:dffe)
+  -whiteListMonitoring
+        White list upstream calls required for monitoring. All Others are forbidden.
 ```
 
 

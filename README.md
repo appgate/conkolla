@@ -1,5 +1,5 @@
 # Disclaimer
-© 2019, AppGate.  All rights reserved. 
+© 2020, AppGate.  All rights reserved. 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met: (a) redistributions of source code must retain the above copyright notice, this list of conditions and the disclaimer below, and (b) redistributions in binary form must reproduce the above copyright notice, this list of conditions and the disclaimer below in the documentation and/or other materials provided with the distribution.
 THE CODE AND SCRIPTS POSTED ON THIS WEBSITE ARE PROVIDED ON AN “AS IS” BASIS AND YOUR USE OF SUCH CODE AND/OR SCRIPTS IS AT YOUR OWN RISK.  APPGATE DISCLAIMS ALL EXPRESS AND IMPLIED WARRANTIES, EITHER IN FACT OR BY OPERATION OF LAW, STATUTORY OR OTHERWISE, INCLUDING, BUT NOT LIMITED TO, ALL WARRANTIES OF MERCHANTABILITY, TITLE, FITNESS FOR A PARTICULAR PURPOSE, NON-INFRINGEMENT, ACCURACY, COMPLETENESS, COMPATABILITY OF SOFTWARE OR EQUIPMENT OR ANY RESULTS TO BE ACHIEVED THEREFROM.  APPGATE DOES NOT WARRANT THAT SUCH CODE AND/OR SCRIPTS ARE OR WILL BE ERROR-FREE.  IN NO EVENT SHALL APPGATE BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, RELIANCE, EXEMPLARY, PUNITIVE OR CONSEQUENTIAL DAMAGES, OR ANY LOSS OF GOODWILL, LOSS OF ANTICIPATED SAVINGS, COST OF PURCHASING REPLACEMENT SERVICES, LOSS OF PROFITS, REVENUE, DATA OR DATA USE, ARISING IN ANY WAY OUT OF THE USE AND/OR REDISTRIBUTION OF SUCH CODE AND/OR SCRIPTS, REGARDLESS OF THE LEGAL THEORY UNDER WHICH SUCH LIABILITY IS ASSERTED AND REGARDLESS OF WHETHER APPGATE HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH LIABILITY.   
 
@@ -16,10 +16,10 @@ From an educational standpoint, Conkolla allows you to:
 * Can be used as a API gateway connecting to many AppGate Controllers at the same time.
 * Gives you discovery with a Web based UI.
 * Gives you all the scripting flexibility to use the http rest API (JSON).
-* Administrate your AppGate
-* Copy from one collective to another
-* Do multi entity manipulation
-* One time system admin tasks that would be too heavy doing it in the UI
+* Administrate your AppGate.
+* Copy from one collective to another.
+* Do multi entity manipulation.
+* One time system admin tasks that would be too heavy doing it in the UI.
 * Prometheus pull Gateway, one target per connection
 * and many more.... 
 
@@ -217,6 +217,8 @@ Either you browse the login form from the UI or get the possible options/fields 
 ```shell
 curl -k -H "Accept: application/json" https://localhost:4433/login/
 ```
+Exemple from v7.0.0:
+
 ```json
 {
   "accept_header_suffix": "+json",
@@ -234,7 +236,7 @@ curl -k -H "Accept: application/json" https://localhost:4433/login/
     "contentTypeHeader": "",
     "label": "",
     "machineId": "",
-    "hideToken": "",
+    "showToken": "",
     "skipVerifySSL": "",
     "dumpAGResponse": "",
     "autoTokenRenewal": "",
@@ -248,7 +250,11 @@ curl -k -H "Accept: application/json" https://localhost:4433/login/
     "promLabelRegion": "",
     "promLabelCountry": "",
     "promLabelCustomer": "",
-    "promLabelCostID": ""
+    "promLabelCostID": "",
+    "kmsBlob": "",
+    "kmsProvider": "",
+    "kmsKey": "",
+    "kmsRegion": ""
   },
   "pageinfo": "login page"
 }
@@ -263,45 +269,64 @@ Note that the form data and the JSON data render to the same attributes and some
 |acceptHeaderSuffix|`+json` or `+gpg`| Default +json, +gpg is used for downloading backup files. You can change it after login.|
 |apiVersion|Integer:number|specifies what AppGate API version to indicate in the upstream headers, usually defaults ok.You can change it after login. |
 |machineID|String:UUIDv4| A UUIDv4 string to identify Conkolla as a client ID towards AppGate Controller. None or faulty given, Conkolla generates a random one.|
-|hideToken|String:`"true"` or `""`| Disables any display/retrieval of the token for the AppGate connection for security reasons.|
+|showToken|String:`"true"` or `""`| Display AppGate token and, if used, the kms cipher.|
 |dumpAGResponse|String:`"true"` or `""`| Conkolla will log the the request and response send to the upstream server. Good for debugging or curious people.|
 |autoTokenRenewal|String:`"true"` or `""`| Conkolla will renew the token if it will expire in less than 5 minutes from now. Also, you will be able to force renewal of tokens by the `/renewtoken`call (see below). Auto Renew does not work when using MFA.|
 |renewToken|String:`"true"` or `""`| Setting this flag allows you to renew the token for an existing connection with a login request. The fields to identify existing connection are: `controllerURL` and `label`. The required field to renew token is:  `password` (and `otp` if required).|
 |promCollector|String:`"true"` or `""`| Setting this flag allows you enable prometheus exporter for the connected collective. It acts like a pull gateway exported, reflecting all metrics of the AppGate collective|
+|kmsRegion|String| Region string of the kms.|
+|kmsKey|String| KMS key ID.|
+|kmsProvider|String:`"aws"`| KMS provider. For now only AWS is supported.|
+|kmsBlob|String:`"true"` or `""`| Password is a KMS Blob.|
 
 
+## KMS
+Since version 7, support for key management service is available. Currently only AWS is supported. You can use KMS to:
+1. login with a aws kms blob as the password (base64 encoded)
+1. use kms for password encryption when using auto-renewal
+
+In the second case, the password is encrypted by the  KMS and the cipher blob stored in memory:
+- During token renewal, the blob is decrypted and the password (plaintext) is used to retrieve new token from AppGate. 
+- After every renewal, if fail or succeeds, password is encrypted and stored again and the password is wiped.
+
+Credentials for KMS is as to the [aws sdk-for-go](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html); from the section *Specifying Credentials*:
+
+1. Environment variables.
+2. Shared credentials file.
+3. If your application is running on an Amazon EC2 instance, IAM role for Amazon EC2.
+4. If your application uses an ECS task definition or RunTask API operation, IAM role for tasks
 
 ## Command line flags
 
 ```shell
 -address string
-        The IP of the proxy. Use 0.0.0.0 to share on network. Use localhost not to share. (default "localhost")
+    	The IP of the proxy. Use 0.0.0.0 to share on network. Use localhost not to share. (default "localhost")
   -apiversion string
-        Default API version for new connections. (default "11")
+    	Default API version for new connections. (default "11")
   -authName string
-        Username for Basic Authentication.
+    	Username for Basic Authentication.
   -authPassword string
-        Password for Basic Authentication.
+    	Password for Basic Authentication.
   -certHosts string
-        Comma-separated hostnames and IPs to generate a certificate for. Generates new certs every time, ignoring the on-board cert.
+    	Comma-separated hostnames and IPs to generate a certificate for. Generates new certs every time, ignoring the on-board cert.
   -combineLogs
-        Write connection logs to stdout instead of individual files.
+    	Write connection logs to stdout instead of individual files.
   -conkollaID string
-        An arbitrary string to identify this running instance.
+    	An arbitrary string to identify this running instance.
   -getOnly
-        Allow only http method GET for all upstream call.
+    	Allow only http method GET for all upstream call.
   -help
-        Display usage
+    	Display usage
   -http
-        Use http instead of https.
+    	Use http instead of https.
   -noAuth
-        Turn basic authentication off. If http is used instad of https, basic auth is turned off.
+    	Turn basic authentication off. If http is used instad of https, basic auth is turned off.
   -port string
-        The port of the proxy. (default "4433")
+    	The port of the proxy. (default "4433")
   -version
-        6.4.1 (release-6:dffe)
+    	7.0.0 (release-7:3b9d)
   -whiteListMonitoring
-        White list upstream calls required for monitoring. All Others are forbidden.
+    	White list upstream calls required for monitoring. All Others are forbidden.
 ```
 
 

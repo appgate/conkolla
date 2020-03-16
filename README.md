@@ -134,6 +134,30 @@ $ conkolla --getOnly --whiteListMonitoring --address 0.0.0.0 -conkollaID test-aw
     ]
 ```
 
+## Conkolla in a deployment
+If you are intending to use ck in a deployment, we recomend:
+- Follow the principle of least privilege:
+  - API account: define an admin role which restricts to the operations and objects needed for the purpose (see next chapter).
+- Does it require read-only? 
+  - If so launch ck with the flags: `-getOnly` to limit upstream calls to GET only method.
+- Are you using it for monitoring only? 
+  - If so launch ck with the flags: `-getOnly` and `whiteListMonitoring`.
+- Do you need access to ck from the public? 
+  - Put a reverse proxy infront with a proper TLS setup. 
+  - Use basic auth on the reverse proxy.
+  - Optionally use basic auth on ck -- if you use prometheus to scrape it locally, you might not need ck running on basic auth.
+  
+### API user for prometheus/monitoring
+The api account does not need more privileges than:
+- **View** all **Appliances**
+- **View** all **Global settings**
+- **Check Status** all **Appliances** 
+
+The following is only needed if you fetch admin messages:
+- **View** all **Admin messages**
+
+
+
 ## Connect to a Controller
 At this stage you will need to have a user with admin permission and privileges to read or write AppGate objects. For more information read:
 * [SDP Help > rest api](https://sdphelp.appgate.com/adminguide/rest-apis.html)
@@ -280,7 +304,13 @@ Note that the form data and the JSON data render to the same attributes and some
 |kmsBlob|String:`"true"` or `""`| Password is a KMS Blob.|
 
 
-## KMS
+# Security: API user password security (KMS)
+## local secrets handling
+Auto-token renewal has until version 7 only been possible due to  a *built in kms* (referred as local), which did the encryption and decryption of the API user's password:
+ - Encrypts password/secrets using 256-bit AES-GCM.  
+ - This both hides the content of the password and provides a check that it hasn't been altered.
+
+## KMS (external encryption/decryption provider)
 Since version 7, support for key management service is available. Currently only AWS is supported. You can use KMS to:
 1. login with a aws kms blob as the password (base64 encoded)
 1. use kms for password encryption when using auto-renewal

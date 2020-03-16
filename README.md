@@ -326,6 +326,8 @@ Credentials for KMS is as to the [aws sdk-for-go](https://docs.aws.amazon.com/sd
 3. If your application is running on an Amazon EC2 instance, IAM role for Amazon EC2.
 4. If your application uses an ECS task definition or RunTask API operation, IAM role for tasks
 
+See also the companion [kmstool cli](./kmstool.md)
+
 ## Command line flags
 
 ```shell

@@ -17,4 +17,4 @@ You can for example use it to report on licenses used, active sessions or any ot
 1. The result is presented in the below ace editor.
 1. Save the content as CSV by clicking the button `save csv`
 
-for more options and information of usage see the [documentation](../README.md).
+for more options and information of usage see the [documentation](./README.md).

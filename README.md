@@ -12,6 +12,7 @@ From an educational standpoint, Conkolla allows you to:
 
 * Discover the API against a real system.
 * Model or craft API requests and work with real responses.
+* [Report data on API responses in form of JSON or CSV](./example_reporting.md)
 * Let's you retrieve tokens when you have not yet covered the auth process in your script.
 * Can be used as a API gateway connecting to many AppGate Controllers at the same time.
 * Gives you discovery with a Web based UI.

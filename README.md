@@ -147,16 +147,6 @@ If you are intending to use ck in a deployment, we recomend:
   - Put a reverse proxy infront with a proper TLS setup. 
   - Use basic auth on the reverse proxy.
   - Optionally use basic auth on ck -- if you use prometheus to scrape it locally, you might not need ck running on basic auth.
-  
-### API user for prometheus/monitoring
-The api account does not need more privileges than:
-- **View** all **Appliances**
-- **View** all **Global settings**
-- **Check Status** all **Appliances** 
-
-The following is only needed if you fetch admin messages:
-- **View** all **Admin messages**
-
 
 
 ## Connect to a Controller
@@ -361,6 +351,65 @@ See also the companion [kmstool cli](./kmstool.md)
   -whiteListMonitoring
     	White list upstream calls required for monitoring. All Others are forbidden.
 ```
+
+
+# Prometheus metrics
+Conkolla translates and exposes metric information from connected controllers. 
+![reference](./prometheus_metrics.png)
+1. The collectors get the source data from the controllers. This is performed to all controllers in the collective, by using a probabilistic request balancer with constant backoff time. Connections are traced as well from the conkolla to the controller (endpoint).
+1. The data is transformed into prometheus gauges, counters and histograms and exposed as a target per connection.
+1. Conkolla gets the data every 20secs.
+
+The target metrics ar are exposed under its `target name`, the URL `https://localhost:4433/metrics?target=<target name>`. 
+
+## API user for prometheus/monitoring
+The api account does not need more privileges than:
+- **View** all **Appliances**
+- **View** all **Global settings**
+- **Check Status** all **Appliances** 
+
+The following is only needed if you fetch admin messages:
+- **View** all **Admin messages**
+
+## Deployment
+- Launch conkolla with `-getOnly` and `whiteListMonitoring` flags.
+- Note that there is no Basic Auth on the `/metrics` path even if Basic Auth is enabled.
+- Use a reverse proxy such as traefik, nginx etc. to secure access to conkolla from  other networks/Internet.
+
+## Prometheus scrape config example
+```yml
+- job_name: trent
+    honor_timestamps: true
+    metrics_path: /metrics
+    scheme: https
+    tls_config:
+        insecure_skip_verify: true
+    relabel_configs:
+    - source_labels: [__address__]
+      target_label: __param_target
+    - source_labels: [__param_target]
+      target_label: target
+    - target_label: __address__
+      replacement: http://monitoring.packnot.intra:4433
+    static_configs:
+    - targets:
+        - ctl1.packnot.comops
+        - ctl2.packnot.comops
+        - ctl3.packnot.comops
+        - ctl4.packnot.comops
+        - ctl5.packnot.comops
+        - ctl6.packnot.comops
+        - ctl7.packnot.comops
+        - ctl8.packnot.comops
+        - ctl9.packnot.comops
+        - ctl10.packnot.comops
+        - ctl11.packnot.comops
+        - ctl12.packnot.comops
+        - ctl13.packnot.comops
+```
+
+- honor time stamps: The metrics from the controller are in form of a pull-gateway, hence not from conkolla. Time stamps are created when data was pulled from controllers.
+- All other metrics, the ones reflecting or created by conkolla, do not bare time stamps.
 
 
 # Conkolla internals

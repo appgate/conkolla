@@ -12,7 +12,7 @@ In the Editor window, an extra library is loaded containing some useful JS funct
 But hey, you could also do all the work in pure JavaScript.
 
 ## Available on editor UI window
-Based on 5.3.3 `answer_rw_console.js`
+Based on 7.2.0 (unchanged since 5.3.3) `answer_rw_console.js`
 
 | name      |      type    | details  |returns|
 | ------------- |:-------------:|--------|-------|

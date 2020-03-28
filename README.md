@@ -19,7 +19,7 @@ From an educational standpoint, Conkolla allows you to:
 * Gives you all the scripting flexibility to use the http rest API (JSON).
 * Administrate your AppGate.
 * Copy from one collective to another.
-* Do multi entity manipulation.
+* [Do multi entity manipulation](./console_multi.png).
 * One time system admin tasks that would be too heavy doing it in the UI.
 * Prometheus pull Gateway, one target per connection
 * and many more.... 

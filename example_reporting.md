@@ -1,4 +1,4 @@
-# Use conkolla to export or report on data
+# Use conkolla to export or report on API calls
 You can use conkolla to export the responses from any API call. You can either downlod it as:
 - JSON
 - CSV

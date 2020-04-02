@@ -9,7 +9,7 @@ You can use conkolla to export the responses from any API call. You can either d
 - JSON
 - CSV
 
-CSV data will be flattened by one level only.
+CSV will flatten the JSON by one level only.
 
 You can for example use it to report on licenses used, active sessions or any other information of interest. Other information, such as the "stats" page can also be fetched as CSV data.
 

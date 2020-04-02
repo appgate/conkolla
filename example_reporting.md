@@ -3,7 +3,7 @@
 Note:
 - The API is administrative and informative: It exposes states and data on the _requested context at the time of the request_.
 - The API does not do query against logserver or the events stored in the logserver.
-- In contrast, the logserver/syslog stores arbitrary events of an _occurence from a determined point of time_ in the past.  
+- In contrast, the logserver/syslog stores arbitrary events, _occurences from a determined point of time_ in the past.  
 
 ## Use conkolla to export or report on API calls
 You can use conkolla to export the responses from any API call. You can either downlod it as:

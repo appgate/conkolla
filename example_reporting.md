@@ -20,7 +20,7 @@ You can for example use it to report on licenses used, active sessions or any ot
 for more options and information of usage see the [documentation](./README.md).
 
 ## CSV download data from Kibana/logserver
-The API gives you configuration and state information. The logserver records events, its a database of events throughout the system. In a industrial installation you will most commonly encounter a log aggregator and SIEM where you will be able to create reports and data of events rather in the on-board logserver.
+The API gives you configuration and state information. The logserver records events. It is a database of events throughout the system arrived at arbitrary times. In an industrial installation you will most commonly encounter a log aggregator and SIEM where you will be able to create reports and data of events rather in the on-board logserver.
 
 It is common for AppGate Admininistrators to have either syslog data or the on-board Kibana data available for troubleshooting and deployement verification, specially in small installations you will find the on-board logserver (Kibana, elastic search etc.) in use. 
 

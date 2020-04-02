@@ -26,7 +26,7 @@ It is common for AppGate Admininistrators to have either syslog data or the on-b
 
 The on-board Kibana is the `open source`, a free of charge, version which does not come with a reporting and exporting feature. The reporting feature appears first in the `Basic` Kibana (elastic search) version, which contains the X-Pack for which the company elastic search cannot claim to be open source and hence the exclution in the free version.
 
-You can **download CSV** from Kibana, as long you created a `visualization` of the data in question, and can use the `inspect` option. See the example from a visualization added to a dashboard:
+You can **download CSV** from Kibana, as long you created a `visualization` of the data in question, and can use the `inspect` option, accessing it by clicking on the three dots °°°. See the example from a visualization added to a dashboard:
 
 ![download csv example](download.png)
 

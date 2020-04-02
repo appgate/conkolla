@@ -55,6 +55,8 @@ Use the following query parameters to search for entities: `query`. Example `/en
 
 # Browser developer tools: wrappers for multi entity manipulation
 With the developer tools (use crhome, at least ECMAScript2018) you can easily do multi entity manipulation from/to/on same/other connected controller.
+![use js console for multi entity edit](./console_multi.png)
+
 
 ## Example: Add a rsyslog destination to all appliances in the collective
 

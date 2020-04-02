@@ -54,7 +54,8 @@ Use the following query parameters to search for entities: `query`. Example `/en
 ![ui_query](./ui_query.png)
 
 # Browser developer tools: wrappers for multi entity manipulation
-With the developer tools (use crhome, at least ECMAScript2018) you can easily do multi entity manipulation from/to/on same/other connected controller.
+With the developer tools (use crhome, at least ECMAScript2018) you can easily do multi entity manipulation from/to/on same/other connected controller. See the [reference documentation for developer mode](./developermode.png).
+
 ![use js console for multi entity edit](./console_multi.png)
 
 

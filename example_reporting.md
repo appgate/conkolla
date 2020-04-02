@@ -28,5 +28,5 @@ The on-board Kibana is the `open source`, a free of charge, version which does n
 
 You can **download CSV** from Kibana, as long you created a `visualization` of the data in question, and can use the `inspect` option. See the example from a visualization added to a dashboard:
 
-![download csv example](download_csv.png)
+![download csv example](download.png)
 

@@ -18,3 +18,15 @@ You can for example use it to report on licenses used, active sessions or any ot
 1. Save the content as CSV by clicking the button `save csv`
 
 for more options and information of usage see the [documentation](./README.md).
+
+## CSV download data from Kibana/logserver
+The API gives you configuration and state information. The logserver records events, its a database of events throughout the system. In a industrial installation you will most commonly encounter a log aggregator and SIEM where you will be able to create reports and data of events rather in the on-board logserver.
+
+It is common for AppGate Admininistrators to have either syslog data or the on-board Kibana data available for troubleshooting and deployement verification, specially in small installations you will find the on-board logserver (Kibana, elastic search etc.) in use. 
+
+The on-board Kibana is the `open source`, a free of charge, version which does not come with a reporting and exporting feature. The reporting feature appears first in the `Basic` Kibana (elastic search) version, which contains the X-Pack for which the company elastic search cannot claim to be open source and hence the exclution in the free version.
+
+You can **download CSV** from Kibana, as long you created a `visualization` of the data in question, and can use the `inspect` option. See the example from a visualization added to a dashboard:
+
+![download csv example](download_csv.png)
+

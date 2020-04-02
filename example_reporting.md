@@ -1,4 +1,10 @@
-# Use conkolla to export or report on API calls
+# Reporting, exporting CSV & Co
+
+Note:
+- the API is administrative and informative. It also exposes states on the requested context.
+- the API does not do query against logserver or the events stored in the logserver.
+
+## Use conkolla to export or report on API calls
 You can use conkolla to export the responses from any API call. You can either downlod it as:
 - JSON
 - CSV

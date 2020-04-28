@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: conkolla
-        image: conkolla-prometheus-ha:latest
-        args: ["--noAuth"]
+        image: conkolla:latest
+        args: ["--noAuth", "--combineLogs"]
         ports:
         - containerPort: 4433

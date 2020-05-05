@@ -60,7 +60,8 @@ kubectl --namespace ${NAMESPACE} port-forward \
 $(kubectl get pod --namespace ${NAMESPACE} -l app=conkolla -o template \
 --template "{{(index .items 0).metadata.name}}") 4433
 ```
-
+## Supported Browser
+Currently Chrome is the browser for which testing is conducted on. Other browsers work as well but we cannot guarantee full functionality.
 
 ## Run Conkolla
 By default Conkolla serves on `https://localhost:4433` with Basic Auth. Different options to launch are available, check with `Conkolla --help` for more information.
@@ -160,7 +161,7 @@ Make sure you know where Conkolla is serving:
 ### Connect to a Controller through web-based UI
 * Open a browser and point to the url (look for "url" in start message) 
 * Default is [https://localhost:4433/login/](https://localhost:4433/login/)
-* Allow the exception for the self signed cert when (if you have not deployed seperate admin UI)
+* Allow the exception for the self signed cert when (if you have not deployed separate admin UI)
 
 
 ![login form](/login_v7.png)
@@ -307,7 +308,7 @@ Since version 7, support for key management service is available. Currently only
 1. use kms for password encryption when using auto-renewal
 
 In the second case, the password is encrypted by the  KMS and the cipher blob stored in memory:
-- During token renewal, the blob is decrypted and the password (plaintext) is used to retrieve new token from AppGate. 
+- During token renewal, the blob is decrypted and the password (plain text) is used to retrieve new token from AppGate. 
 - After every renewal, if fail or succeeds, password is encrypted and stored again and the password is wiped.
 
 Credentials for KMS is as to the [aws sdk-for-go](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html); from the section *Specifying Credentials*:
@@ -356,7 +357,7 @@ See also the companion [kmstool cli](./kmstool.md)
 # Prometheus metrics
 Conkolla translates and exposes metric information from connected controllers. 
 ![reference](./prometheus_metrics.png)
-1. The collectors get the source data from the controllers. This is performed to all controllers in the collective, by using a probabilistic request balancer with constant backoff time. Connections are traced as well from the conkolla to the controller (endpoint).
+1. The collectors get the source data from the controllers. This is performed to all controllers in the collective, by using a probabilistic request balancer with constant back off time. Connections are traced as well from the conkolla to the controller (endpoint).
 1. The data is transformed into prometheus gauges, counters and histograms and exposed as a target per connection.
 1. Conkolla gets the data every 20secs.
 
@@ -375,6 +376,10 @@ The following is only needed if you fetch admin messages:
 - Launch conkolla with `-getOnly` and `whiteListMonitoring` flags.
 - Note that there is no Basic Auth on the `/metrics` path even if Basic Auth is enabled.
 - Use a reverse proxy such as traefik, nginx etc. to secure access to conkolla from  other networks/Internet.
+
+For a full deployment example see:
+* (https://github.com/appgate/sdp-prom-monitoring)  
+
 
 ## Prometheus scrape config example
 ```yml

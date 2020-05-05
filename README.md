@@ -212,12 +212,12 @@ Use always method `POST` for the proxy call. The upstream HTTP method is include
 **Note: you need to drop the `/admin` part of the path.** Do not specify the `/admin` part in the path for the rest call. Conkolla adds it automatically on the upstream call.
 
 
-| Upstream Call Method       |       Proxy Call Method     | Description  |Proxy Call Parameters |
-| ------------- |:-------------:|-----|----------|
-|GET|POST| Get entitites.|`restCall`|
-|POST|POST|Create new entities.|`restCall` `objectData`|
-|PUT|POST|Change entities.|`restCall` `objectData`|
-|DELETE|POST|Delete entities|`restCall`|
+| Upstream Call Method | Proxy Call Method | Description          | Proxy Call Parameters   |
+|----------------------|:-----------------:|----------------------|-------------------------|
+| GET                  |        POST       | Get entitites.       | `restCall`              |
+| POST                 |        POST       | Create new entities. | `restCall` `objectData` |
+| PUT                  |        POST       | Change entities.     | `restCall` `objectData` |
+| DELETE               |        POST       | Delete entities      | `restCall`              |
 
 
 **`restCall`**: the upstream rest call, example: _`/entitlements/0c32530f-e15b-4720-a261-acae73c3d417`_.
@@ -274,25 +274,25 @@ Exemple from v7.0.0:
   "pageinfo": "login page"
 }
 ```
-Note that the form data and the JSON data render to the same attributes and some boolean values might be therefore treated as a non-empty value instead as real booleans. Absence signifies `false`where presence of any value signifies `true`
+From Version 7.4 JSON values are now separated from the form login, so they are treated all as proper data types (e.g booleans are bool and not string literals).
 
 
-| Param        | Value           | Description  |
-| ------------- |:-------------:| -----|
-|label|String:text|Labels a connection with the given text. Allows you to connect many times to same AppGate Controller under different label. Labels allows you also to do bulk rest calls and help you sort and find connections. Any space in the will be replaced with `-`.|
-|otp|String:number|if the user account uses MFA, enter the next MFA code here. Supports only built-in MFA.|
-|acceptHeaderSuffix|`+json` or `+gpg`| Default +json, +gpg is used for downloading backup files. You can change it after login.|
-|apiVersion|Integer:number|specifies what AppGate API version to indicate in the upstream headers, usually defaults ok.You can change it after login. |
-|machineID|String:UUIDv4| A UUIDv4 string to identify Conkolla as a client ID towards AppGate Controller. None or faulty given, Conkolla generates a random one.|
-|showToken|String:`"true"` or `""`| Display AppGate token and, if used, the kms cipher.|
-|dumpAGResponse|String:`"true"` or `""`| Conkolla will log the the request and response send to the upstream server. Good for debugging or curious people.|
-|autoTokenRenewal|String:`"true"` or `""`| Conkolla will renew the token if it will expire in less than 5 minutes from now. Also, you will be able to force renewal of tokens by the `/renewtoken`call (see below). Auto Renew does not work when using MFA.|
-|renewToken|String:`"true"` or `""`| Setting this flag allows you to renew the token for an existing connection with a login request. The fields to identify existing connection are: `controllerURL` and `label`. The required field to renew token is:  `password` (and `otp` if required).|
-|promCollector|String:`"true"` or `""`| Setting this flag allows you enable prometheus exporter for the connected collective. It acts like a pull gateway exported, reflecting all metrics of the AppGate collective|
-|kmsRegion|String| Region string of the kms.|
-|kmsKey|String| KMS key ID.|
-|kmsProvider|String:`"aws"`| KMS provider. For now only AWS is supported.|
-|kmsBlob|String:`"true"` or `""`| Password is a KMS Blob.|
+| Param              |          Value         | Description                                                                                                                                                                                                                                                  |
+|--------------------|:----------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| label              |       String:text      | Labels a connection with the given text. Allows you to connect many times to same AppGate Controller under different label. Labels allows you also to do bulk rest calls and help you sort and find connections. Any space in the will be replaced with `-`. |
+| otp                |      String:number     | if the user account uses MFA, enter the next MFA code here. Supports only built-in MFA.                                                                                                                                                                      |
+| acceptHeaderSuffix |    `+json` or `+gpg`   | Default +json. +gpg is used for downloading backup files. You can change it after login. Since v. 7.4 headers switch automatically.                                                                                                                          |
+| apiVersion         |     Integer:number     | specifies what AppGate API version to indicate in the upstream headers, usually defaults ok. You can change it after login.                                                                                                                                  |
+| machineID          |      String:UUIDv4     | A UUIDv4 string to identify Conkolla as a client ID towards AppGate Controller. None or faulty given, Conkolla generates a random one.                                                                                                                       |
+| showToken          | Bool:`true` or `false` | Display AppGate token and, if used, the kms cipher.                                                                                                                                                                                                          |
+| dumpAGResponse     | Bool:`true` or `false` | Conkolla will log the the request and response send to the upstream server. Good for debugging or curious people.                                                                                                                                            |
+| autoTokenRenewal   | Bool:`true` or `false` | Conkolla will renew the token if it will expire in less than 5 minutes from now. Also, you will be able to force renewal of tokens by the `/renewtoken`call (see below). Auto Renew does not work when using MFA.                                            |
+| renewToken         | Bool:`true` or `false` | Setting this flag allows you to renew the token for an existing connection with a login request. The fields to identify existing connection are: `controllerURL` and `label`. The required field to renew token is:  `password` (and `otp` if required).     |
+| promCollector      | Bool:`true` or `false` | Setting this flag allows you enable prometheus exporter for the connected collective. It acts like a pull gateway exported, reflecting all metrics of the AppGate collective                                                                                 |
+| kmsRegion          |         String         | Region string of the kms.                                                                                                                                                                                                                                    |
+| kmsKey             |         String         | KMS key ID.                                                                                                                                                                                                                                                  |
+| kmsProvider        |     String:`"aws"`     | KMS provider. For now only AWS is supported.                                                                                                                                                                                                                 |
+| kmsBlob            | Bool:`true` or `false` | Password is a KMS Blob.                                                                                                                                                                                                                                      |
 
 
 # Security: API user password security (KMS)

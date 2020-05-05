@@ -378,7 +378,7 @@ The following is only needed if you fetch admin messages:
 - Use a reverse proxy such as traefik, nginx etc. to secure access to conkolla from  other networks/Internet.
 
 For a full deployment example see:
-* (https://github.com/appgate/sdp-prom-monitoring)  
+* https://github.com/appgate/sdp-prom-monitoring  
 
 
 ## Prometheus scrape config example

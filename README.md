@@ -294,9 +294,30 @@ From Version 7.4 JSON values are now separated from the form login, so they are 
 | kmsKey             |         String         | KMS key ID.                                                                                                                                                                                                                                                  |
 | kmsProvider        |     String:`"aws"`     | KMS provider. For now only AWS is supported.                                                                                                                                                                                                                 |
 | kmsBlob            | Bool:`true` or `false` | Password is a KMS Blob.                                                                                                                                                                                                                                      |
+| azureVault         | Bool:`true` or `false` | Use azure vault for password retrieval.                                                                                                                                                                                                                      |
+| azureSecretName    |         String         | The name of the secret which holds the password.                                                                                                                                                                                                             |
+| azureVaultName     |         string         | The name of the vault.                                                                                                                                                                                                                                       |
 
 
-# Security: API user password security (KMS)
+# Security: AppGate user password handling
+The password is a secret and needs proper protection. Conkolla provides different methods and handlers:
+- The password is only used while logging in. After the log-in the plain-text password is wiped from memory.
+- Using azure vault does always get the password from the vault. You will not need to provide the password to conkolla in any form. It will never store it locally.
+- If you use `autoTokenRenewal`:
+	- and use KMS or none (local secret handler):
+		- The password is handled and stored in memory according to the secrets handler locally.
+	- and use azure vault:
+		-The password is always fetched from the vault when needed and never stored locally.
+
+## Azure Vault secret handler (new since v7.5)
+The vault allows you to never disclose the password (or encrypted password) to the operations. Conkolla will use the `vault name` and the `secret name` to retrieve the password's plain-text from the vault. If `autoTokenRenewal` is used, it will simply use the the vault parameters to retrieve the password during renewal. 
+
+Conkolla supports only `Azure Managed Identies` for this operation. The internal authorization process for conkolla against the vault relies on the assigned identity and is deduced from the cloud layer. To make this work, we require the following setup:
+- A `user assigned identity` (under azure > managed identities)
+- The VM on which conkolla runs has been assigned the `user assigned identity`. 
+- The vault has a policy set to allow that identity `to get the secret`.
+
+
 ## local secrets handling
 Auto-token renewal has until version 7 only been possible due to  a *built in kms* (referred as local), which did the encryption and decryption of the API user's password:
  - Encrypts password/secrets using 256-bit AES-GCM.  

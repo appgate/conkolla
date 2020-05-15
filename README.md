@@ -344,34 +344,36 @@ See also the companion [kmstool cli](./kmstool.md)
 ## Command line flags
 
 ```shell
--address string
-    	The IP of the proxy. Use 0.0.0.0 to share on network. Use localhost not to share. (default "localhost")
+  -address string
+        The IP of the proxy. Use 0.0.0.0 to share on network. Use localhost not to share. (default "localhost")
   -apiversion string
-    	Default API version for new connections. (default "11")
+        Default API version for new connections. (default "12")
   -authName string
-    	Username for Basic Authentication.
+        Username for Basic Authentication.
   -authPassword string
-    	Password for Basic Authentication.
+        Password for Basic Authentication.
   -certHosts string
-    	Comma-separated hostnames and IPs to generate a certificate for. Generates new certs every time, ignoring the on-board cert.
+        Comma-separated hostnames and IPs to generate a certificate for. Generates new certs every time, ignoring the on-board cert.
   -combineLogs
-    	Write connection logs to stdout instead of individual files.
+        Write connection logs to stdout instead of individual files.
   -conkollaID string
-    	An arbitrary string to identify this running instance.
+        An arbitrary string to identify this running instance.
+  -connectionsFile string
+        Specify file with path from which connections shall be read from.
   -getOnly
-    	Allow only http method GET for all upstream call.
+        Allow only http method GET for all upstream call.
   -help
-    	Display usage
+        Display usage
   -http
-    	Use http instead of https.
+        Use http instead of https.
   -noAuth
-    	Turn basic authentication off. If http is used instad of https, basic auth is turned off.
+        Turn basic authentication off. If http is used instad of https, basic auth is turned off.
   -port string
-    	The port of the proxy. (default "4433")
+        The port of the proxy. (default "4433")
   -version
-    	7.0.0 (release-7:3b9d)
+        7.5.1 (release-7:f9ad)
   -whiteListMonitoring
-    	White list upstream calls required for monitoring. All Others are forbidden.
+        White list upstream calls required for monitoring. All Others are forbidden.
 ```
 
 

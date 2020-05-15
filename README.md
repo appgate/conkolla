@@ -164,7 +164,7 @@ Make sure you know where Conkolla is serving:
 * Allow the exception for the self signed cert when (if you have not deployed separate admin UI)
 
 
-![login form](/login_v7.png)
+![login form](/login.png)
 
 Check the [examples page](/examples.md) for how to connect via command line.
 

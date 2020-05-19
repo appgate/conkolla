@@ -11,7 +11,7 @@ The password is a secret and needs proper protection. Conkolla provides differen
 		- The password is always fetched from the vault when needed and never stored locally.
 
 ## Secret handlers
-Secret handlers have been implemented to create an appropriate level of security around the password used for a connection to log in. It is however the operators responsibility to configure the appropriate handler in conkolla, and follow the principle of least privileges when creating API users in AppGate.
+Secret handlers have been implemented to create an appropriate level of security around the password used for a connection to login. It is however the operators responsibility to configure the appropriate handler in conkolla, and follow the principle of least privileges when creating API users in AppGate.
 The handler is configured during the connection setup aka login. The operator will be setting these through a combination with/or 
 - username , password
 - parameters to configure the handler
@@ -71,7 +71,7 @@ Credentials for KMS is as to the [aws sdk-for-go](https://docs.aws.amazon.com/sd
 3. If your application is running on an Amazon EC2 instance, IAM role for Amazon EC2.
 4. If your application uses an ECS task definition or RunTask API operation, IAM role for tasks
 
-
+In the illustration we are using IAM role, which is the most recommended way.
 
 See also the companion [kmstool cli](./kmstool.md)
 

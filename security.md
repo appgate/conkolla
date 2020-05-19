@@ -1,5 +1,5 @@
 # AppGate password handling
-The password is a secret and needs proper protection. Conkolla provides different methods and handlers to deal with the security of.
+The password is a secret and needs proper protection. Conkolla provides different methods and handlers to deal with the security of. This is a dedicated page from the [conkolla documentation](./README.md).
 
 ## Overview
 - The password is only used by conkolla while logging in a connection and exists only in memory. After the login the plain-text password is deleted.

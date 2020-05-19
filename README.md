@@ -300,46 +300,7 @@ From Version 7.4 JSON values are now separated from the form login, so they are 
 
 
 # Security: AppGate user password handling
-The password is a secret and needs proper protection. Conkolla provides different methods and handlers:
-- The password is only used while logging in. After the log-in the plain-text password is wiped from memory.
-- Using azure vault does always get the password from the vault. You will not need to provide the password to conkolla in any form. It will never store it locally.
-- If you use `autoTokenRenewal`:
-	- and use KMS or none (local secret handler):
-		- The password is handled and stored in memory according to the secrets handler locally.
-	- and use azure vault:
-		-The password is always fetched from the vault when needed and never stored locally.
-
-## Azure Vault secret handler (new since v7.5)
-The vault allows you to never disclose the password (or encrypted password) to the operations. Conkolla will use the `vault name` and the `secret name` to retrieve the password's plain-text from the vault. If `autoTokenRenewal` is used, it will simply use the the vault parameters to retrieve the password during renewal. 
-
-Conkolla supports only `Azure Managed Identies` for this operation. The internal authorization process for conkolla against the vault relies on the assigned identity and is deduced from the cloud layer. To make this work, we require the following setup:
-- A `user assigned identity` (under azure > managed identities)
-- The VM on which conkolla runs has been assigned the `user assigned identity`. 
-- The vault has a policy set to allow that identity `to get the secret`.
-
-
-## local secrets handling
-Auto-token renewal has until version 7 only been possible due to  a *built in kms* (referred as local), which did the encryption and decryption of the API user's password:
- - Encrypts password/secrets using 256-bit AES-GCM.  
- - This both hides the content of the password and provides a check that it hasn't been altered.
-
-## KMS (external encryption/decryption provider)
-Since version 7, support for key management service is available. Currently only AWS is supported. You can use KMS to:
-1. login with a aws kms blob as the password (base64 encoded)
-1. use kms for password encryption when using auto-renewal
-
-In the second case, the password is encrypted by the  KMS and the cipher blob stored in memory:
-- During token renewal, the blob is decrypted and the password (plain text) is used to retrieve new token from AppGate. 
-- After every renewal, if fail or succeeds, password is encrypted and stored again and the password is wiped.
-
-Credentials for KMS is as to the [aws sdk-for-go](https://docs.aws.amazon.com/sdk-for-go/v1/developer-guide/configuring-sdk.html); from the section *Specifying Credentials*:
-
-1. Environment variables.
-2. Shared credentials file.
-3. If your application is running on an Amazon EC2 instance, IAM role for Amazon EC2.
-4. If your application uses an ECS task definition or RunTask API operation, IAM role for tasks
-
-See also the companion [kmstool cli](./kmstool.md)
+See the [dedicated password security page](./security.md) for this topic.
 
 ## Command line flags
 

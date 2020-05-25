@@ -1,5 +1,5 @@
 # AppGate password handling
-The password is a secret and needs proper protection. Conkolla provides different methods and handlers to deal with the security of the password. The current implementation does handle the password only meaning we encrypt and decrypt the plain text password, the enc/decryption is either local, done by the KMS. Envelope encryption is not yet supported but might be added later. Envelope encryption has the property to encrypt the DEK (Data Encryption Key) which is generated locally. The secret will then be enc/decrypted locally only. Hence the external KMS would never be able to decrypt the secret but only the DEK.
+The password is a secret and needs proper protection. Conkolla provides different methods and handlers to deal with the security of the password. The current implementation does handle the password only, meaning we encrypt and decrypt the password, either locally or by the KMS. Envelope encryption is not yet supported but might be added later. Envelope encryption has the property to encrypt the DEK (Data Encryption Key) which is generated locally to encrypt the password locally. Hence the external KMS would never be able to decrypt the secret but only the DEK.
 
 
 This is a dedicated page from the [conkolla documentation](./README.md).

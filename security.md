@@ -79,7 +79,7 @@ In the illustration we are using IAM role, which is the most recommended way.
 See also the companion [kmstool cli](./kmstool.md)
 
 ### Envelope encryption
-Envelope encryption is not implemented but might be added. This also would mean that the encrypted DEK (Data Encryption Key) would need to be passed as a parameter alongside to the encrypted secret. The parameters would be:
+[Envelope encryption](https://github.com/google/tink/blob/master/docs/GOLANG-HOWTO.md#envelope-encryption) is not implemented but might be added. This also would mean that the encrypted DEK (Data Encryption Key) would need to be passed as a parameter alongside to the encrypted secret. The parameters would be:
 
 * _Encrypt_<sub>DEK</sub>(password) &rarr; encrypted password
 * _Encrypt_<sub>KEK</sub>(DEK) &rarr; encrypted DEK

@@ -1,4 +1,3 @@
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 # AppGate password handling
 The password is a secret and needs proper protection. Conkolla provides different methods and handlers to deal with the security of the password. The current implementation does handle the password only meaning we encrypt and decrypt the plain text password, the enc/decryption is either local, done by the KMS. Envelope encryption is not yet supported but might be added later. Envelope encryption has the property to encrypt the DEK (Data Encryption Key) which is generated locally. The secret will then be enc/decrypted locally only. Hence the external KMS would never be able to decrypt the secret but only the DEK.
 
@@ -82,8 +81,9 @@ See also the companion [kmstool cli](./kmstool.md)
 ### Envelope encryption
 Envelope encryption is not implemented but might be added. This also would mean that the encrypted DEK (Data Encryption Key) would need to be passed as a parameter alongside to the encrypted secret. The parameters would be:
 
-ENC_{KEK}(DEK) \to encrypted DEK
-ENC_{DEK}(password)\to encrypted password
+* _Encrypt_<sub>DEK</sub>(password) &rarr; encrypted password
+* _Encrypt_<sub>KEK</sub>(DEK) &rarr; encrypted DEK
+
 
 The format of the paramter(s) will be defined later (probably protobuf at rest).
 

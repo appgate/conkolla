@@ -1,5 +1,9 @@
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=default"></script>
 # AppGate password handling
-The password is a secret and needs proper protection. Conkolla provides different methods and handlers to deal with the security of. This is a dedicated page from the [conkolla documentation](./README.md).
+The password is a secret and needs proper protection. Conkolla provides different methods and handlers to deal with the security of the password. The current implementation does handle the password only meaning we encrypt and decrypt the plain text password, the enc/decryption is either local, done by the KMS. Envelope encryption is not yet supported but might be added later. Envelope encryption has the property to encrypt the DEK (Data Encryption Key) which is generated locally. The secret will then be enc/decrypted locally only. Hence the external KMS would never be able to decrypt the secret but only the DEK.
+
+
+This is a dedicated page from the [conkolla documentation](./README.md).
 
 ## Overview
 - The password is only used by conkolla while logging in a connection and exists only in memory. After the login the plain-text password is deleted.
@@ -75,6 +79,13 @@ In the illustration we are using IAM role, which is the most recommended way.
 
 See also the companion [kmstool cli](./kmstool.md)
 
+### Envelope encryption
+Envelope encryption is not implemented but might be added. This also would mean that the encrypted DEK (Data Encryption Key) would need to be passed as a parameter alongside to the encrypted secret. The parameters would be:
+
+ENC_{KEK}(DEK) \to encrypted DEK
+ENC_{DEK}(password)\to encrypted password
+
+The format of the paramter(s) will be defined later (probably protobuf at rest).
 
 ### Azure Vault secret handler (new since v7.5)
 The vault allows you to never disclose the password (or encrypted password) to the operations. Conkolla will use the `vault name` and the `secret name` to retrieve the password's plain-text from the vault. If `autoTokenRenewal` is used, it will simply use the vault parameters to retrieve the password during renewal. 

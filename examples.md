@@ -380,16 +380,11 @@ Example:
 }
 ```
 
-4.1 Change upstream accept header to use `+gpg` before downloading the backup
-```shell
-curl -k -H "Accept: application/json" -X POST  --data '{"acceptHeaderSuffix":"+gpg", "apiVersion":9}' https://localhost:4433/agc/1/conf
-```
-Don't forget to put it back to `+json` when finished downloading.
-
-4.2 Fetch the backup file
+4 Fetch the backup file
 ``` shell
  curl -o backup.gpg -H "Accept: application/json" -k https://localhost:4433/get/1/appliances/f7ab1be3-8d32-4027-bcf3-91da6f0c0560/backup/dbb45e6c-22fb-11e9-ab06-065aaf365c98
 ```
+Note: the `AcceptHeader suffix` does automatically change from the suffix `+json` to `+gpg`. If you implement your own handler, you will need to take this into account.
 
 ```shell
 -rw-r--r--   1 ron  staff   118M 21 Mai 11:50 backup.gpg

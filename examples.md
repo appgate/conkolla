@@ -135,7 +135,7 @@ entitiesFromEditor(1, "entitlements", putEntity)
 ```
 
 ### Update notes field on all entitlements, using only console
-Note you need to be on the editor page for the necessery JS code (used function etc) to be loaded loaded.
+Note you need to be on the editor page for the necessary JS code (used function etc) to be loaded loaded.
 
 This code goes as to the above steps, with the difference of doing all the steps programmatically. Here the code:
 
@@ -170,7 +170,7 @@ for (var i=1; i< 21; i++) {
 
 ```
 
-## Copy entitities from one system to another
+## Copy entities from one system to another
 This example demonstrates how you can copy entities from one to another system in a controlled and assisted way. The below example copies entitlements by using the in-editor loaded entitlements:
 
 - Log-in to both controllers `src` and `dst`, assure you have the privileges to write entitlements on dst.
@@ -241,7 +241,7 @@ for (let con of cons){
 When a user is terminated (the identity shall be removed from the IdP), clean-up scripts will usually take care of removing all the parts and pieces for that user. Admins can hook in and use for example power-shell scripts. In one of the clean-up stages you would have then a script which does the clean-up in AppGate for that user:
 
 - free the license
-- delete all onboarded devices
+- delete all on boarded devices
 - remove otp seeds
 
 Sometimes you need to run a one-off to clean out a user in AppGate. This code will do it:
@@ -311,7 +311,7 @@ The following example depicts how you can upgrade an appliance from the conkolla
 ```
 Response should be: "202 ACCEPTED"
 
-Status can only be checked by pulling: *GET* `/<appliance-ID>/upgrade`. Note that there can be error messages during different states of the upgraed such as 
+Status can only be checked by pulling: *GET* `/<appliance-ID>/upgrade`. Note that there can be error messages during different states of the upgraded such as 
 database connection or time-outs during service restarts etc. All these are currently natural for an upgrade.
 
 Check the status of the appliance to verify if all went as should.

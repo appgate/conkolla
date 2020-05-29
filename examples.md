@@ -10,6 +10,16 @@ Conkolla has a API spec on board and parses it for quick access: If you open the
  * Some examples use the developer mode of your browser, more instruction can be found [here](./developermode.md).
  
  
+## Start the upgrade monitor
+The monitor updates every 10 seconds and can be useful to monitor an upgrade. To start it do:
+
+1. Open the editor of the connection
+2. Open the developer tools of chrome, then in the console type: `startUpgradeMonitor()`.
+3. Close the developer tools.
+
+The monitor ends if you reload (or move away) the page. 
+![upgrade monitor](./upgrade-monitor.png)
+ 
 ## Login through curl (command line)
 
 ```shell

@@ -21,7 +21,8 @@ From an educational standpoint, Conkolla allows you to:
 * Copy from one collective to another.
 * [Do multi entity manipulation](./console_multi.png).
 * One time system admin tasks that would be too heavy doing it in the UI.
-* Prometheus pull Gateway, one target per connection
+* Prometheus pull Gateway, one target per connection.
+* Upgrade monitor, watching your cluster upgrade progress in a tabular format.
 * and many more.... 
 
 The AppGate API can be learned and discovered in different ways. One of the common ways is to use the developer tools in a web browser while browsing through the AppGate admin UI, or use existing API Gateway or API Mocker such as postman or prism. 

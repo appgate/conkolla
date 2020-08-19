@@ -20,8 +20,9 @@ From an educational standpoint, Conkolla allows you to:
 * Upgrade monitor, watching your cluster upgrade progress in a tabular format.
 * Backup and download backup file with the UI.
 
-![baup](backup-download.mov){:height="300px" width="150px"}
-* and many more.... 
+![baup](backup-download.mov)
+
+and many more.... 
 
 The AppGate API can be learned and discovered in different ways. One of the common ways is to use the developer tools in a web browser while browsing through the AppGate admin UI, or use existing API Gateway or API Mocker such as postman or prism. 
 However, with Conkolla you get another option to choose from.

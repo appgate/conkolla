@@ -20,7 +20,7 @@ From an educational standpoint, Conkolla allows you to:
 * Upgrade monitor, watching your cluster upgrade progress in a tabular format.
 * Backup and download backup file with the UI.
 
-![baup](backup-download.mov)
+![baup](backup-download.gif)
 
 and many more.... 
 

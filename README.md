@@ -1,7 +1,7 @@
 # Overview
-A HTTP API Gateway (aka proxy) for interacting with the AppGate API. The name is a portmanteau for `Controller` and `kolla`, translated from a discovered rune stone in Gothenburg in Sweden meaning: "to look at the Controller".
+A HTTP API Gateway (aka proxy) for interacting with the Appgate API. The name is a portmanteau for `Controller` and `kolla`, translated from a discovered rune stone in Gothenburg in Sweden meaning: "to look at the Controller".
 
-While the Customer Reliability Team has been working with various integration projects which involved AppGate SDP API, we learned that a tool, which was used over and over, will be handy to rapid prototyping. Eventually "the tool" became more feature rich and we started to believe it is useful for anyone working with AppGate SDP integrations. 
+While the Customer Reliability Team has been working with various integration projects which involved Appgate SDP API, we learned that a tool, which was used over and over, will be handy to rapid prototyping. Eventually "the tool" became more feature rich and we started to believe it is useful for anyone working with Appgate SDP integrations. 
 
 From an educational standpoint, Conkolla allows you to:
 
@@ -9,10 +9,10 @@ From an educational standpoint, Conkolla allows you to:
 * Model or craft API requests and work with real responses.
 * [Report data on API responses in form of JSON or CSV](./example_reporting.md)
 * Let's you retrieve tokens when you have not yet covered the auth process in your script.
-* Can be used as a API gateway connecting to many AppGate Controllers at the same time.
+* Can be used as a API gateway connecting to many Appgate Controllers at the same time.
 * Gives you discovery with a Web based UI.
 * Gives you all the scripting flexibility to use the http rest API (JSON).
-* Administrate your AppGate.
+* Administrate your Appgate.
 * Copy from one collective to another.
 * [Do multi entity manipulation](./console_multi.png).
 * One time system admin tasks that would be too heavy doing it in the UI.
@@ -26,18 +26,18 @@ From an educational standpoint, Conkolla allows you to:
 
 and many more.... 
 
-The AppGate API can be learned and discovered in different ways. One of the common ways is to use the developer tools in a web browser while browsing through the AppGate admin UI, or use existing API Gateway or API Mocker such as postman or prism. 
+The Appgate API can be learned and discovered in different ways. One of the common ways is to use the developer tools in a web browser while browsing through the Appgate admin UI, or use existing API Gateway or API Mocker such as postman or prism. 
 However, with Conkolla you get another option to choose from.
 
 # Usage
-Conkolla can be seen as a proxy, sitting between the user and the AppGate Controller:
+Conkolla can be seen as a proxy, sitting between the user and the Appgate Controller:
 ![login form](/arch.png)
 
 
 
 The user will basically do the following steps when using Conkolla:
 1. Launch Conkolla.
-2. Login to a AppGate Controller through Conkolla. 
+2. Login to a Appgate Controller through Conkolla. 
 3. Use the the new connection in Conkolla to run rest calls against the connected Controller.
 
 # Quick start
@@ -82,7 +82,7 @@ chmod +x conkolla
 $ conkolla --getOnly --whiteListMonitoring --address 0.0.0.0 -conkollaID test-aws-docker -authName maraboux --authPassword maraboux
 
  {
-    "copyright": "AppGate Inc. 2019 (marx)",
+    "copyright": "Appgate Inc. 2019 (marx)",
     "date": "2019-12-20",
     "directory": "/home/ec2-user/conkolla",
     "certPath": "templates/cert.pem",
@@ -153,7 +153,7 @@ If you are intending to use ck in a deployment, we recomend:
 
 
 ## Connect to a Controller
-At this stage you will need to have a user with admin permission and privileges to read or write AppGate objects. For more information read:
+At this stage you will need to have a user with admin permission and privileges to read or write Appgate objects. For more information read:
 * [SDP Help > rest api](https://sdphelp.appgate.com/adminguide/rest-apis.html)
 
 Make sure you know where Conkolla is serving:
@@ -183,8 +183,8 @@ If you need to manipulate multiple entities use the developer mode in chrome and
 * [advanced, developer mode](developermode.md)
 
 ## Crafting REST calls via Conkolla
-### Rest calls to an AppGate Controller
-Rest calls towards an AppGate Controller are in the form of:
+### Rest calls to an Appgate Controller
+Rest calls towards an Appgate Controller are in the form of:
 * `https://{URL}:{PORT}/admin/{RESOURCE or PATH}`
 
 where as:
@@ -282,16 +282,16 @@ From Version 7.4 JSON values are now separated from the form login, so they are 
 
 | Param              |          Value         | Description                                                                                                                                                                                                                                                  |
 |--------------------|:----------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| label              |       String:text      | Labels a connection with the given text. Allows you to connect many times to same AppGate Controller under different label. Labels allows you also to do bulk rest calls and help you sort and find connections. Any space in the will be replaced with `-`. |
+| label              |       String:text      | Labels a connection with the given text. Allows you to connect many times to same Appgate Controller under different label. Labels allows you also to do bulk rest calls and help you sort and find connections. Any space in the will be replaced with `-`. |
 | otp                |      String:number     | if the user account uses MFA, enter the next MFA code here. Supports only built-in MFA.                                                                                                                                                                      |
 | acceptHeaderSuffix |    `+json` or `+gpg`   | Default +json. +gpg is used for downloading backup files. You can change it after login. Since v. 7.4 headers switch automatically.                                                                                                                          |
-| apiVersion         |     Integer:number     | specifies what AppGate API version to indicate in the upstream headers, usually defaults ok. You can change it after login.                                                                                                                                  |
-| machineID          |      String:UUIDv4     | A UUIDv4 string to identify Conkolla as a client ID towards AppGate Controller. None or faulty given, Conkolla generates a random one.                                                                                                                       |
-| showToken          | Bool:`true` or `false` | Display AppGate token and, if used, the kms cipher.                                                                                                                                                                                                          |
+| apiVersion         |     Integer:number     | specifies what Appgate API version to indicate in the upstream headers, usually defaults ok. You can change it after login.                                                                                                                                  |
+| machineID          |      String:UUIDv4     | A UUIDv4 string to identify Conkolla as a client ID towards Appgate Controller. None or faulty given, Conkolla generates a random one.                                                                                                                       |
+| showToken          | Bool:`true` or `false` | Display Appgate token and, if used, the kms cipher.                                                                                                                                                                                                          |
 | dumpAGResponse     | Bool:`true` or `false` | Conkolla will log the the request and response send to the upstream server. Good for debugging or curious people.                                                                                                                                            |
 | autoTokenRenewal   | Bool:`true` or `false` | Conkolla will renew the token if it will expire in less than 5 minutes from now. Also, you will be able to force renewal of tokens by the `/renewtoken`call (see below). Auto Renew does not work when using MFA.                                            |
 | renewToken         | Bool:`true` or `false` | Setting this flag allows you to renew the token for an existing connection with a login request. The fields to identify existing connection are: `controllerURL` and `label`. The required field to renew token is:  `password` (and `otp` if required).     |
-| promCollector      | Bool:`true` or `false` | Setting this flag allows you enable prometheus exporter for the connected collective. It acts like a pull gateway exported, reflecting all metrics of the AppGate collective                                                                                 |
+| promCollector      | Bool:`true` or `false` | Setting this flag allows you enable prometheus exporter for the connected collective. It acts like a pull gateway exported, reflecting all metrics of the Appgate collective                                                                                 |
 | kmsRegion          |         String         | Region string of the kms.                                                                                                                                                                                                                                    |
 | kmsKey             |         String         | KMS key ID.                                                                                                                                                                                                                                                  |
 | kmsProvider        |     String:`"aws"`     | KMS provider. For now only AWS is supported.                                                                                                                                                                                                                 |
@@ -301,7 +301,7 @@ From Version 7.4 JSON values are now separated from the form login, so they are 
 | azureVaultName     |         string         | The name of the vault.                                                                                                                                                                                                                                       |
 
 
-# Security: AppGate user password handling
+# Security: Appgate user password handling
 See the [dedicated password security page](./security.md) for this topic.
 
 ## Command line flags
@@ -421,7 +421,7 @@ Proxy API to a connected Controller connection follows the scheme:
 * or the combined string of `{ControllerURL}{label}`.
 
 `UPSTREAM RESTCALL`
-* AppGate API path/resource, without the `/admin` in the path.
+* Appgate API path/resource, without the `/admin` in the path.
 
 `BODY`
 * JSON encoded payload if any
@@ -444,7 +444,7 @@ Proxy API to a connected Controller connection follows the scheme:
 |`/apispec` | GET | Displays the on-board apispec (might be outdated, use the linked from the menu for reference).|
 
 ### Connection  
-These are related to the AppGate connection and might do rest calls to upstream AppGate Controllers.
+These are related to the Appgate connection and might do rest calls to upstream Appgate Controllers.
 
 | Path        | Method           | Description  |
 | ------------- |:-------------:| -----|
@@ -455,7 +455,7 @@ These are related to the AppGate connection and might do rest calls to upstream 
 Note: `/renewtoken` is currently controlled via a `GET` whereas it would be more reasonable with a `PUT`--  this might change in the future.
 
 ### Operations specific
-Note these calls will always do rest calls to upstream AppGate Controllers.
+Note these calls will always do rest calls to upstream Appgate Controllers.
 
 | Path        | Method           | Description  |
 | ------------- |:-------------:| -----|

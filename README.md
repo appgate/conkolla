@@ -235,12 +235,12 @@ Either you browse the login form from the UI or get the possible options/fields 
 ```shell
 curl -k -H "Accept: application/json" https://localhost:4433/login/
 ```
-Exemple from v7.0.0:
+Example:
 
 ```json
 {
   "accept_header_suffix": "+json",
-  "api_version": 11,
+  "api_version": 0,
   "content_type_header": "application/json",
   "loginFormFields": {
     "controllerURL": "",
@@ -251,31 +251,36 @@ Exemple from v7.0.0:
     "providerName": "",
     "apiVersion": 0,
     "acceptHeaderSuffix": "",
-    "contentTypeHeader": "",
     "label": "",
     "machineId": "",
-    "showToken": "",
-    "skipVerifySSL": "",
-    "dumpAGResponse": "",
-    "autoTokenRenewal": "",
-    "renewToken": "",
-    "promCollector": "",
+    "showToken": false,
+    "skipVerifySSL": false,
+    "dumpAGResponse": false,
+    "autoTokenRenewal": false,
+    "renewToken": false,
+    "contentTypeHeader": "",
+    "promCollector": false,
     "promTargetName": "",
     "promLabelExporter": "",
     "promLabelEnvironment": "",
     "promLabelGroup": "",
     "promLabelSite": "",
-    "promLabelRegion": "",
+    "PromLabelRegion": "",
     "promLabelCountry": "",
     "promLabelCustomer": "",
     "promLabelCostID": "",
-    "kmsBlob": "",
+    "kmsBlob": false,
     "kmsProvider": "",
     "kmsKey": "",
-    "kmsRegion": ""
+    "kmsRegion": "",
+    "azureVault": false,
+    "azureVaultName": "",
+    "azureClientID": "",
+    "azureSecretName": ""
   },
   "pageinfo": "login page"
 }
+
 ```
 From Version 7.4 JSON values are now separated from the form login, so they are treated all as proper data types (e.g booleans are bool and not string literals).
 

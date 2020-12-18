@@ -17,7 +17,7 @@ From an educational standpoint, Conkolla allows you to:
 * [Do multi entity manipulation](./console_multi.png).
 * One time system admin tasks that would be too heavy doing it in the UI.
 * Prometheus pull Gateway, one target per connection.
-* Auto connect: control connections solely by a connections file. Useful in autonomous deployments (k8s/ConfigMap)
+* [Auto connect: control connections](./autoconnect.md) solely by a connections file. Useful in autonomous deployments (k8s/ConfigMap)
 * Upgrade monitor, watching your cluster upgrade progress in a tabular format.
 * Backup and download backup file with the UI.
 

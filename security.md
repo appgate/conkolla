@@ -93,6 +93,8 @@ The vault allows you to never disclose the password (or encrypted password) to t
 
 ![Azure vault handler](./handler-vault-azure.png)
 
+This works well with [Azure Active Directory Pod Identity](https://github.com/Azure/aad-pod-identity) for kubernetes. Instead of the VM the pod running conkolla will be mapped to a managed identity.
+
 You can login a connection from file or via REST/form. You need only to specify the vault parameters. Example:
 
 ```
@@ -113,4 +115,5 @@ Conkolla supports only `Azure Managed Identies` for this operation. The internal
 - A `user assigned identity` (under azure > managed identities)
 - The VM on which conkolla runs has been assigned the `user assigned identity`. 
 - The vault has a policy set to allow that identity `to get the secret`. 
+
 

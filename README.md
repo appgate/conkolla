@@ -17,8 +17,10 @@ From an educational standpoint, Conkolla allows you to:
 * [Do multi entity manipulation](./console_multi.png).
 * One time system admin tasks that would be too heavy doing it in the UI.
 * Prometheus pull Gateway, one target per connection.
+* [Auto connect: control connections](./autoconnect.md) solely by a connections file. Useful in autonomous deployments (k8s/ConfigMap)
 * Upgrade monitor, watching your cluster upgrade progress in a tabular format.
 * Backup and download backup file with the UI.
+
 
 ![baup](backup-download.gif)
 
@@ -286,35 +288,35 @@ Example:
     "azureVault": false,
     "azureVaultName": "",
     "azureClientID": "",
-    "azureSecretName": ""
+    "azureSecretName": "",
+    "autoConnectForce": false
   },
   "pageinfo": "login page"
 }
-
 ```
 From Version 7.4 JSON values are now separated from the form login, so they are treated all as proper data types (e.g booleans are bool and not string literals).
 
 
-| Param              |          Value         | Description                                                                                                                                                                                                                                                  |
+| Param              | Value                  | Description                                                                                                                                                                                                                                                  |
 |--------------------|:----------------------:|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| label              |       String:text      | Labels a connection with the given text. Allows you to connect many times to same Appgate Controller under different label. Labels allows you also to do bulk rest calls and help you sort and find connections. Any space in the will be replaced with `-`. |
-| otp                |      String:number     | if the user account uses MFA, enter the next MFA code here. Supports only built-in MFA.                                                                                                                                                                      |
-| acceptHeaderSuffix |    `+json` or `+gpg`   | Default +json. +gpg is used for downloading backup files. You can change it after login. Since v. 7.4 headers switch automatically.                                                                                                                          |
-| apiVersion         |     Integer:number     | specifies what Appgate API version to indicate in the upstream headers, usually defaults ok. You can change it after login.                                                                                                                                  |
-| machineID          |      String:UUIDv4     | A UUIDv4 string to identify Conkolla as a client ID towards Appgate Controller. None or faulty given, Conkolla generates a random one.                                                                                                                       |
+| label              | String:text            | Labels a connection with the given text. Allows you to connect many times to same Appgate Controller under different label. Labels allows you also to do bulk rest calls and help you sort and find connections. Any space in the will be replaced with `-`. |
+| otp                | String:number          | if the user account uses MFA, enter the next MFA code here. Supports only built-in MFA.                                                                                                                                                                      |
+| acceptHeaderSuffix | `+json` or `+gpg`      | Default +json. +gpg is used for downloading backup files. You can change it after login. Since v. 7.4 headers switch automatically.                                                                                                                          |
+| apiVersion         | Integer:number         | specifies what Appgate API version to indicate in the upstream headers, usually defaults ok. You can change it after login.                                                                                                                                  |
+| machineID          | String:UUIDv4          | A UUIDv4 string to identify Conkolla as a client ID towards Appgate Controller. None or faulty given, Conkolla generates a random one.                                                                                                                       |
 | showToken          | Bool:`true` or `false` | Display Appgate token and, if used, the kms cipher.                                                                                                                                                                                                          |
 | dumpAGResponse     | Bool:`true` or `false` | Conkolla will log the the request and response send to the upstream server. Good for debugging or curious people.                                                                                                                                            |
 | autoTokenRenewal   | Bool:`true` or `false` | Conkolla will renew the token if it will expire in less than 5 minutes from now. Also, you will be able to force renewal of tokens by the `/renewtoken`call (see below). Auto Renew does not work when using MFA.                                            |
 | renewToken         | Bool:`true` or `false` | Setting this flag allows you to renew the token for an existing connection with a login request. The fields to identify existing connection are: `controllerURL` and `label`. The required field to renew token is:  `password` (and `otp` if required).     |
 | promCollector      | Bool:`true` or `false` | Setting this flag allows you enable prometheus exporter for the connected collective. It acts like a pull gateway exported, reflecting all metrics of the Appgate collective                                                                                 |
-| kmsRegion          |         String         | Region string of the kms.                                                                                                                                                                                                                                    |
-| kmsKey             |         String         | KMS key ID.                                                                                                                                                                                                                                                  |
-| kmsProvider        |     String:`"aws"`     | KMS provider. For now only AWS is supported.                                                                                                                                                                                                                 |
+| kmsRegion          | String                 | Region string of the kms.                                                                                                                                                                                                                                    |
+| kmsKey             | String                 | KMS key ID.                                                                                                                                                                                                                                                  |
+| kmsProvider        | String:`"aws"`         | KMS provider. For now only AWS is supported.                                                                                                                                                                                                                 |
 | kmsBlob            | Bool:`true` or `false` | Password is a KMS Blob.                                                                                                                                                                                                                                      |
 | azureVault         | Bool:`true` or `false` | Use azure vault for password retrieval.                                                                                                                                                                                                                      |
-| azureSecretName    |         String         | The name of the secret which holds the password.                                                                                                                                                                                                             |
-| azureVaultName     |         string         | The name of the vault.                                                                                                                                                                                                                                       |
-
+| azureSecretName    | String                 | The name of the secret which holds the password.                                                                                                                                                                                                             |
+| azureVaultName     | string                 | The name of the vault.                                                                                                                                                                                                                                       |
+| autoConnectForce   | Bool:`true` or `false` | Only used with the connection file, ignored in the login                                                                                                                                                                                                     |
 
 # Security: Appgate user password handling
 See the [dedicated password security page](./security.md) for this topic.
@@ -355,6 +357,8 @@ See the [dedicated password security page](./security.md) for this topic.
   -whiteListMonitoring
     	White list upstream calls required for monitoring. All Others are forbidden.
 ```
+# Auto connection (connection file)
+The auto connection functionality allows you to control connections configurations solely through a file. This is a rather large topic so it deserved its [own page](./autoconnect.md). 
 
 
 # Prometheus metrics

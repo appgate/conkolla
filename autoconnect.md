@@ -66,7 +66,7 @@ Once auto-connector has started a connection task, it will try connecting foreve
 Pending connections can be canceled by deleting the connection from the connectionsFile.
 
 Whenever there is change in the file, the auto-connector will handle the specification accordingly:
-[!ac-work-flow](./auto-connect-workflow.png)
+![ac-work-flow](./auto-connect-workflow.png)
 
  A change can be triggered by two things:
  1. `Version` field value change

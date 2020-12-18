@@ -358,7 +358,7 @@ See the [dedicated password security page](./security.md) for this topic.
     	White list upstream calls required for monitoring. All Others are forbidden.
 ```
 # Auto connection (connection file)
-The auto connection functionality allows you to control connections configurations solely through a file. This is a rather large topic so it deserved its [own page](.autoconnect.md). 
+The auto connection functionality allows you to control connections configurations solely through a file. This is a rather large topic so it deserved its [own page](./autoconnect.md). 
 
 
 # Prometheus metrics

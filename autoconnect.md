@@ -1,4 +1,4 @@
-# Auto connect
+# Auto connect (from V8.0.0)
 The auto connection functionality allows you to control connections configurations solely through a file.
 Such a feature is handy when deploying ck in a autonomous setup within for example Kubernetes or DockerSwarm. In Kubernetes for example, you can re-configure, enable or disable connections with a ConfigMap.
 

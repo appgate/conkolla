@@ -377,6 +377,7 @@ The api account does not need more privileges than:
 - **Check Status** all **Appliances** 
 - **View** all **Tokenrecords**
 - **View** all **OnBoardedDevices**
+- **View** all **SessionInfo**
 
 The following is only needed if you fetch admin messages:
 - **View** all **Admin messages**

@@ -371,12 +371,12 @@ Conkolla translates and exposes metric information from connected controllers.
 The target metrics ar are exposed under its `target name`, the URL `https://localhost:4433/metrics?target=<target name>`. 
 
 ## API user for prometheus/monitoring
-The api account does not need more privileges than:
+The api account does not need more privileges than (based on v5.3.1):
 - **View** all **Appliances**
 - **View** all **Global settings**
 - **Check Status** all **Appliances** 
 - **View** all **Tokenrecords**
-- **View** all **OnBoardedDevices**
+- **View** all **RegisteredDevices**
 - **View** all **SessionInfo**
 
 The following is only needed if you fetch admin messages:

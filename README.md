@@ -236,7 +236,7 @@ Example:
 ```json
 {
   "accept_header_suffix": "+json",
-  "api_version": 0,
+  "api_version": 14,
   "content_type_header": "application/json",
   "loginFormFields": {
     "controllerURL": "",
@@ -253,6 +253,7 @@ Example:
     "skipVerifySSL": false,
     "dumpAGResponse": false,
     "autoTokenRenewal": false,
+    "shortIntervalRenewal": 0,
     "renewToken": false,
     "contentTypeHeader": "",
     "promCollector": false,

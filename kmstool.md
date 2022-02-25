@@ -26,3 +26,15 @@ Credentials for KMS is as to the aws [aws sdk-for-go](https://docs.aws.amazon.co
 |[kmscli linux](https://appgate-material.s3.eu-central-1.amazonaws.com/bin/kmscli)|ccd1e8fb9d7c3af5f0e68f8df4f13fb8a9b5887186c5ca5b7e310ed8ccee7319|
  
  
+ ## Example Usage (Linux)
+ ```
+ # Encrypt to console:
+./kmscli -key KMS_UUID -provider aws -region AWS_REGION_CODE -secret MY_PLAINTEXT_PASSWORD -string
+
+# Encrypt to file: 
+./kmscli -key KMS_UUID -provider aws -region AWS_REGION_CODE -secret MY_PLAINTEXT_PASSWORD -file MY_BLOB_FILE
+
+# Decryption:
+./kmscli -key KMS_UUID -provider aws -region AWS_REGION_CODE -file MY_BLOB_FILE
+
+ ```
